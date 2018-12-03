@@ -1,5 +1,8 @@
 package com.netcracker.edu.adder;
 
+import java.io.*;
+
+
 /**
  * Class is responsible for adding 2 files with integers line by line and saving a result to another file
  * If at least one of input files does not exist, throw appropriate exception with
@@ -46,11 +49,65 @@ public class IntegerFileAdder implements Adder {
         this.pathToOutputFile = pathToOutputFile;
     }
 
+    public String getPathToInputFile1() {
+        return pathToInputFile1;
+    }
+
+    public String getPathToInputFile2() {
+        return pathToInputFile2;
+    }
+
+    public String getPathToOutputFile() {
+        return pathToOutputFile;
+    }
+
     /**
      * Method adds integer content of 2 input files line by line and saves result to output file or throws exception
      * @throws Exception
      */
-    public void add() throws Exception {
+    public void add() throws FileNotFoundException {
         // implement me
+
+        try(FileReader input1 = new FileReader(getPathToInputFile1());
+            BufferedReader bufInput1= new BufferedReader(input1);
+
+            FileReader input2 = new FileReader(getPathToInputFile2());
+            BufferedReader bufInput2 = new BufferedReader(input2);
+
+            FileWriter output = new FileWriter(getPathToOutputFile());
+            BufferedWriter bufOutput = new BufferedWriter(output)) {
+
+            String inputLine1;
+            String inputLine2;
+            Integer outputLine;
+
+
+            while (  (inputLine1 = bufInput1.readLine()) != null | (inputLine2 = bufInput2.readLine()) !=null) {
+                if(inputLine1  != null & inputLine2 !=null){
+                    outputLine =Integer.parseInt(inputLine1)+Integer.parseInt(inputLine2);
+
+                }
+                else {
+                    if (inputLine1 != null)
+                        outputLine = Integer.parseInt(inputLine1) + 0;
+                    else outputLine = Integer.parseInt(inputLine2) + 0;
+                }
+
+                bufOutput.write(outputLine.toString());
+                bufOutput.newLine();
+            }
+        }
+
+        catch(FileNotFoundException e){
+            throw new FileNotFoundException("File not found");
+
+        }
+        catch (IOException e){
+            System.out.println("IOex");
+        }
+        catch (NumberFormatException e){
+            throw new NumberFormatException("Result of sum operation is not in [INTEGER_MIN; INTEGER_MAX) half-open interval or string can`t be convert to Integer");
+        }
+
     }
 }
