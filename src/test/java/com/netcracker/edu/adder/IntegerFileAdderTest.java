@@ -1,7 +1,11 @@
 package com.netcracker.edu.adder;
 
+
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.apache.commons.io.FileUtils;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,9 +13,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.fail;
-import org.apache.commons.io.FilenameUtils;
+import static junit.framework.TestCase.fail;
+
 
 public class IntegerFileAdderTest {
     protected static Object integerFileAdder;
