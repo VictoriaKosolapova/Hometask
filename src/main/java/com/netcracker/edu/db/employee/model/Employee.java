@@ -1,10 +1,14 @@
 package com.netcracker.edu.db.employee.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import java.math.BigInteger;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
     private BigInteger id;
     private String name;
